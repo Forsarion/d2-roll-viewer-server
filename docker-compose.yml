@@ -1,0 +1,9 @@
+version: "3.4"
+
+services: 
+  server: 
+    build: .
+    volumes: 
+      - ./:/app
+    ports: 
+      - "8181:8181"
