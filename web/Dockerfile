@@ -1,9 +1,8 @@
-FROM node:8-slim as runner
+FROM node:8-slim as environment
 
 WORKDIR /app
-EXPOSE 80
 
-FROM runner
+FROM environment as builder
 
 COPY package.json ./
 COPY yarn.lock ./
@@ -12,16 +11,10 @@ RUN yarn install --frozen-lockfile && yarn cache clean
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
-ARG BUILD_NUMBER=unknown
-ARG GIT_COMMIT=unknown
-ARG GIT_BRANCH=unknown
+FROM zzswang/docker-nginx-react as production
 
-LABEL com.jenkins.build=${BUILD_NUMBER}
-LABEL com.git.commit=${GIT_COMMIT}
-LABEL com.git.branch=${GIT_BRANCH}
+ENV DEBUG=off
 
-ENV BUILD_NUMBER=${BUILD_NUMBER} GIT_COMMIT=${GIT_COMMIT} GIT_BRANCH=${GIT_BRANCH}
-
-CMD [ "npm", "start" ]
+COPY --from=builder /app/build /app
