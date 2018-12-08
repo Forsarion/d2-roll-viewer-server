@@ -3,12 +3,17 @@
   "version": "0.0.1",
   "description": "D2 Roll viewer web",
   "author": "Alexey Demedetskii, Andrey Moskvin",
-  "main": "./build/index.js",
+  "main": "src/index.tsx",
   "scripts": {
-    "build": "tsc -p ./src",
+    "lint": "tslint -p ./",
+    "tsc": "tsc -p ./ --noEmit",
+    "tsc:watch": "tsc -p ./ --noEmit -w",
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject",
     "watch-debug": "yarn install && tsc-watch --project ./src --onSuccess \"npm run debug\"",
-    "debug": "node --inspect=0.0.0.0:9223 ./build/index.js",
-    "start": "node ./build/index.js"
+    "debug": "node --inspect=0.0.0.0:9223 ./build/index.js"
   },
   "dependencies": {
     "react": "^16.6.3",
@@ -17,8 +22,8 @@
   "devDependencies": {
     "@types/react": "^16.7.13",
     "@types/react-dom": "^16.0.11",
-    "npm": "^6.4.1",
-    "tsc-watch": "^1.0.31",
-    "typescript": "^3.0.1"
+    "tslint": "^5.11.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2"
   }
 }
