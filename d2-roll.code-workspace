@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "Server",
+			"path": "./server"
+		},
+		{
+			"name": "Web",
+			"path": "./web"
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
