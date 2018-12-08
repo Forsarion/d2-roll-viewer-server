@@ -1,1 +1,19 @@
 version: "3.4"
+
+services:
+  web: 
+    build: 
+      context: ./web
+      target: runner
+    command: npm run watch-debug
+    expose:
+      - '9223'
+    ports:
+      - '8080:80'
+      - '9223:9223'
+    volumes:
+      - yarn_cache:/usr/local/share/.cache/yarn
+      - ./web:/app
+
+volumes:
+  yarn_cache: # used for speed up operations with yarn
