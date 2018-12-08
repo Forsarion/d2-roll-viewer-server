@@ -9,8 +9,7 @@ const styles: React.CSSProperties = {
 };
 
 const Root = () => (
-  <div style={styles}>
-  </div>
+  <div style={styles}/>
 );
 
 render(<Root />, document.getElementById('root'));

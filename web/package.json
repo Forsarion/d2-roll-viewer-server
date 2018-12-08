@@ -8,10 +8,12 @@
     "lint": "tslint -p ./",
     "tsc": "tsc -p ./ --noEmit",
     "tsc:watch": "tsc -p ./ --noEmit -w",
+    
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
+
     "watch-debug": "yarn install && tsc-watch --project ./src --onSuccess \"npm run debug\"",
     "debug": "node --inspect=0.0.0.0:9223 ./build/index.js"
   },
