@@ -1,1 +1,21 @@
 version: "3.4"
+
+services:
+  web: 
+    build: 
+      context: ./web
+      target: environment
+    command: yarn start
+    expose:
+      - '9223'
+      - '3000'
+    ports:
+      - '3000:3000'
+      - '8080:80'
+      - '9223:9223'
+    volumes:
+      - yarn_cache:/usr/local/share/.cache/yarn
+      - ./web:/app:cached
+
+volumes:
+  yarn_cache: # used for speed up operations with yarn
