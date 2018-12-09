@@ -12,20 +12,22 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload. Check?
           </p>
-          <Items items={[
-            {
-              hash: "1675393889",
-              icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
-            },
-            {
-              hash: "1675393889",
-              icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
-            },
-            {
-              hash: "1675393889",
-              icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
-            }
-          ]}/>
+          <ul className='items'>
+            <Items items={[
+              {
+                hash: "1675393889",
+                icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
+              },
+              {
+                hash: "1675393889",
+                icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
+              },
+              {
+                hash: "1675393889",
+                icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
+              }
+            ]}/>
+          </ul>
           <a
             className="App-link"
             href="https://reactjs.org"

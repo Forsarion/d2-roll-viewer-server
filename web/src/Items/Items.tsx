@@ -17,10 +17,10 @@ export interface ItemProps {
 class Items extends React.Component<Props> {
   render() {    
     return this.props.items.map(item => {
-      <li key={item.hash + '-' + Math.random()} className={cx('item', 'tooltip')} data-itemhash={item.hash}>
-        <div className="icon">
-          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${props.icon}`} />
-        </div>
+      return <li key={item.hash + '-' + Math.random()}>
+          <div className='icon item tooltip' data-itemhash={item.hash}>
+            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${item.icon}`} />
+          </div>
       </li>
     });
   }
