@@ -5,27 +5,24 @@ import ObservedImage from './ObservedImage';
 
 import './Items.css';
 
-class Items extends React.Component {
-  render() {
-    let manifest = this.props.manifest;
+export interface Props {
+  items: ItemProps[]
+}
 
-    let itemsRequested = this.props.hashes;
+export interface ItemProps {
+  hash: string
+  icon: string
+}
 
-    let items = [];
-    
-    itemsRequested.forEach(hash => {
-      let itemDefinition = manifest.DestinyInventoryItemDefinition[hash];
-
-      items.push(
-        <li key={itemDefinition.hash + '-' + Math.random()} className={cx('item', 'tooltip')} data-itemhash={itemDefinition.hash}>
-          <div className="icon">
-            <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${itemDefinition.displayProperties.icon}`} />
-          </div>
-        </li>
-      );
+class Items extends React.Component<Props> {
+  render() {    
+    return this.props.items.map(item => {
+      <li key={item.hash + '-' + Math.random()} className={cx('item', 'tooltip')} data-itemhash={item.hash}>
+        <div className="icon">
+          <ObservedImage className={cx('image', 'icon')} src={`https://www.bungie.net${props.icon}`} />
+        </div>
+      </li>
     });
-
-    return items;
   }
 }
 
