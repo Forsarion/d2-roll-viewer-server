@@ -1,0 +1,42 @@
+type Helmet {
+    stats: Stats
+
+    enchantementPerk: PerkGroup
+    activePerk1: PerkGroup
+    activePerk2: PerkGroup
+    
+    resistance: Resistance
+}
+
+type Stats {
+    mobility: Stat
+    resilence: Stat
+    recovery: Stat
+}
+
+type Stat {
+    level: Int
+    maximum: Int
+}
+
+type PerkGroup {
+    active: Perk
+    perks: [Perk]
+}
+
+type Perk {
+    isActive: Boolean
+    name: String
+    description: String
+}
+
+type Resistance {
+    element: Element 
+    level: Int
+}
+
+enum Element {
+    arc
+    solar
+    void
+}

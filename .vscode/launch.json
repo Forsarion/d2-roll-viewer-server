@@ -1,24 +1,5 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Run your Executable",
-            "program": "${workspaceFolder}/.build/debug/D2RollViewerServer",
-            "args": [],
-            "cwd": "${workspaceFolder}",
-            "preLaunchTask": "swift-build"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "Debug tests on macOS",
-            "program": "/Applications/Xcode.app/Contents/Developer/usr/bin/xctest",
-            "args": [
-                "${workspaceFolder}.build/debug/D2RollViewerServer.xctest"
-            ],
-            "preLaunchTask": "swift-build-tests"
-        }
     ]
 }
