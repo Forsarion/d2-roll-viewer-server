@@ -5,38 +5,19 @@ import Items from './Items/Items';
 
 class App extends Component {
   render() {
+    const item = {
+      hash: "1675393889",
+      icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
+    }
+
+    const items = [];
+    for (var i = 0; i <50; i++) {
+      items.push(item)
+    }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload. Check?
-          </p>
-          <ul className='items'>
-            <Items items={[
-              {
-                hash: "1675393889",
-                icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
-              },
-              {
-                hash: "1675393889",
-                icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
-              },
-              {
-                hash: "1675393889",
-                icon: "/common/destiny2_content/icons/dc688a83c2420aa0e48403bfa1df54ee.jpg"
-              }
-            ]}/>
-          </ul>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+          <Items items={items}/>
       </div>
     );
   }
