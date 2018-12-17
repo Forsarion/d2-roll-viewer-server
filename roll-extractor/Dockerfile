@@ -1,6 +1,7 @@
 FROM node:8-slim as environment
 
 WORKDIR /app
+RUN yarn config set cache-folder /yarn_cache
 
 FROM environment as builder
 

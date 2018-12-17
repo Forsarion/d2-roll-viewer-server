@@ -1,0 +1,15 @@
+{
+  "name": "roll-extractor",
+  "version": "1.0.0",
+  "description": "Utility server to extract all possible rolls from d2 items",
+  "main": "src/index.ts",
+  "author": "Alexey Demedetskit, Andrey Moskvin",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^10.12.15",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "build": "tsc -p ./"
+  }
+}
