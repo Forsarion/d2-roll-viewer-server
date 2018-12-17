@@ -7,6 +7,10 @@
 		{
 			"name": "Web",
 			"path": "./web"
+		},
+		{
+			"name": "Roll extractor",
+			"path": "./roll-extractor"
 		}
 	],
 	"settings": {

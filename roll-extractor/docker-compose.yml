@@ -1,0 +1,7 @@
+version: "3.4"
+
+services: 
+  roll-extractor:
+    build: 
+      context: . 
+      target: environment
