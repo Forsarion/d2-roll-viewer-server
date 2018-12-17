@@ -11,3 +11,8 @@ services:
     build: 
       context: . 
       target: environment
+    command: yarn debug
+    expose: 
+      - "9229"
+    ports:
+      - "9229:9229"

@@ -10,6 +10,9 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "build": "tsc -p ./"
+    "build": "tsc -p ./",
+    "watch": "tsc -p ./ -w",
+    "predebug": "yarn watch",
+    "debug": "node --inspect-brk=0.0.0.0:9229 ./dist/index.js"
   }
 }
