@@ -1,0 +1,117 @@
+{
+    "sockets": [
+        {
+            "plugHash": 2000319334,
+            "isEnabled": true,
+            "isVisible": true,
+            "reusablePlugHashes": [
+                2000319334
+            ],
+            "reusablePlugs": [
+                {
+                    "plugItemHash": 2000319334,
+                    "canInsert": true,
+                    "enabled": true
+                }
+            ]
+        },
+        {
+            "plugHash": 1633794450,
+            "isEnabled": true,
+            "isVisible": true,
+            "reusablePlugHashes": [
+                1633794450,
+                2032054360
+            ],
+            "reusablePlugs": [
+                {
+                    "plugItemHash": 1633794450,
+                    "canInsert": true,
+                    "enabled": true
+                },
+                {
+                    "plugItemHash": 2032054360,
+                    "canInsert": true,
+                    "enabled": true
+                }
+            ]
+        },
+        {
+            "plugHash": 2600899007,
+            "isEnabled": true,
+            "isVisible": true
+        },
+        {
+            "plugHash": 3789923091,
+            "isEnabled": true,
+            "isVisible": true,
+            "reusablePlugHashes": [
+                3789923088
+            ],
+            "reusablePlugs": [
+                {
+                    "plugItemHash": 3789923088,
+                    "canInsert": true,
+                    "enabled": true
+                }
+            ]
+        },
+        {
+            "plugHash": 4248210736,
+            "isEnabled": true,
+            "isVisible": true,
+            "reusablePlugHashes": [
+                4248210736
+            ],
+            "reusablePlugs": [
+                {
+                    "plugItemHash": 4248210736,
+                    "canInsert": true,
+                    "enabled": true
+                }
+            ]
+        },
+        {
+            "plugHash": 3069341742,
+            "isEnabled": true,
+            "isVisible": true,
+            "reusablePlugHashes": [
+                3069341742,
+                514613051
+            ],
+            "reusablePlugs": [
+                {
+                    "plugItemHash": 3069341742,
+                    "canInsert": true,
+                    "enabled": true
+                },
+                {
+                    "plugItemHash": 514613051,
+                    "canInsert": true,
+                    "enabled": true
+                }
+            ]
+        },
+        {
+            "plugHash": 2620835322,
+            "isEnabled": true,
+            "isVisible": true,
+            "reusablePlugHashes": [
+                2620835322,
+                2867719094
+            ],
+            "reusablePlugs": [
+                {
+                    "plugItemHash": 2620835322,
+                    "canInsert": true,
+                    "enabled": true
+                },
+                {
+                    "plugItemHash": 2867719094,
+                    "canInsert": true,
+                    "enabled": true
+                }
+            ]
+        }
+    ]
+}

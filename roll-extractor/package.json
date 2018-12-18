@@ -12,7 +12,11 @@
   "scripts": {
     "build": "tsc -p ./",
     "watch": "tsc -p ./ -w",
+
     "predebug": "yarn watch",
-    "debug": "node --inspect-brk=0.0.0.0:9229 ./dist/index.js"
+    "debug": "node --inspect-brk=0.0.0.0:9229 ./dist/index.js",
+
+    "prestart": "yarn build",
+    "start": "node ./dist/index.js"
   }
 }
