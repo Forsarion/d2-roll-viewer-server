@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -28,6 +29,8 @@ func findHelmets(writer http.ResponseWriter, request *http.Request) {
 	if error != nil {
 		panic(error)
 	}
+
+	fmt.Printf("%+v\n", characterInventory.Response.ItemComponents.Sockets.Data["6917529046296926329"])
 
 	var helmets []InventoryItem
 	for _, item := range characterInventory.Response.ProfileInventory.Data.Items {
