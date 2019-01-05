@@ -1,20 +1,37 @@
-package main
+package manifest
 
-// ManifestDatabase Database of all items
-type ManifestDatabase struct {
+// Database Database of all items
+type Database struct {
 	// Data id to data dictionary
 	Data map[string]InventoryItem `json:"DestinyInventoryItemDefinition"`
 }
 
 // InventoryItem Description
 type InventoryItem struct {
-	ItemID            string  `json:"itemID"`
+	ItemID            string
 	SubType           SubType `json:"itemSubType"`
 	Type              Type    `json:"itemType"`
 	DisplayProperties struct {
 		Name        string `json:"name"`
 		Description string `json:"description"`
 	} `json:"displayProperties"`
+	Sockets struct {
+		Detail        string   `json:"detail"`
+		SocketEntries []Socket `json:"socketEntries"`
+	} `json:"sockets"`
+}
+
+// Socket Description
+type Socket struct {
+	SocketTypeHash        uint64             `json:"socketTypeHash"`
+	SingleInitialItemHash uint64             `json:"singleInitialItemHash"`
+	ReusablePlugItems     []ReusablePlugItem `json:"reusablePlugItems"`
+	PlugSources           uint               `json:"plugSources"`
+}
+
+// ReusablePlugItem Desription
+type ReusablePlugItem struct {
+	PlugItemHash uint64 `json:"plugItemHash"`
 }
 
 // SubType Description

@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	manifest "manifest"
 	"net/http"
 	"strconv"
 )
 
-func findHelmets(writer http.ResponseWriter, request *http.Request) {
+func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 	var file, error = ioutil.ReadFile("../misc/forsarion-inventory.json")
 	if error != nil {
 		panic(error)
@@ -24,25 +24,24 @@ func findHelmets(writer http.ResponseWriter, request *http.Request) {
 		panic(error)
 	}
 
-	var manifestDatabase ManifestDatabase
+	var manifestDatabase manifest.Database
 	error = json.Unmarshal(file, &manifestDatabase)
 	if error != nil {
 		panic(error)
 	}
 
-	fmt.Printf("%+v\n", characterInventory.Response.ItemComponents.Sockets.Data["6917529046296926329"])
-
-	var helmets []InventoryItem
+	var helmets []manifest.InventoryItem
 	for _, item := range characterInventory.Response.ProfileInventory.Data.Items {
 		id := strconv.FormatInt(item.Hash, 10)
 		itemDefinition := manifestDatabase.Data[id]
 		itemDefinition.ItemID = id
-		if itemDefinition.Type != Armor {
+		if itemDefinition.Type != manifest.Armor {
 			continue
 		}
-		if itemDefinition.SubType != HelmetArmor {
+		if itemDefinition.SubType != manifest.HelmetArmor {
 			continue
 		}
+
 		helmets = append(helmets, itemDefinition)
 	}
 
@@ -50,6 +49,7 @@ func findHelmets(writer http.ResponseWriter, request *http.Request) {
 	if error != nil {
 		panic(error)
 	}
+
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(json)
 }

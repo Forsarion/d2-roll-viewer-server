@@ -32,7 +32,7 @@ type Sockets struct {
 
 // Socket Socket definition.
 type Socket struct {
-	PlugHash           int            `json:"plugHash"`
+	PlugHash           int64          `json:"plugHash"`
 	IsEnabled          bool           `json:"isEnabled"`
 	IsVisible          bool           `json:"isVisible"`
 	ReusablePlugHashes []int          `json:"reusablePlugHashes"`

@@ -1,4 +1,4 @@
-package main
+package manifest
 
 import (
 	"fmt"
@@ -26,7 +26,8 @@ func hasManifestJSONFile() bool {
 	return !os.IsNotExist(error)
 }
 
-func manifest(writer http.ResponseWriter, request *http.Request) {
+// HTTPHandler HTTPHandler to write manifest.json to disc.
+func HTTPHandler(writer http.ResponseWriter, request *http.Request) {
 	if !strings.Contains(request.URL.Path, "loadManifest") {
 		panic("Handler attached to wrong request!")
 	}
