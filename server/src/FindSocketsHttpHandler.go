@@ -6,8 +6,10 @@ import (
 	"io/ioutil"
 	manifest "manifest"
 	"net/http"
+	"strconv"
 )
 
+// FindSockets Description
 func FindSockets(writer http.ResponseWriter, request *http.Request) {
 	var file, error = ioutil.ReadFile("../misc/forsarion-inventory.json")
 	if error != nil {
@@ -35,7 +37,9 @@ func FindSockets(writer http.ResponseWriter, request *http.Request) {
 	for _, sockets := range characterInventory.Response.ItemComponents.Sockets.Data {
 		for _, socket := range sockets.Sockets {
 			for _, hash := range socket.ReusablePlugHashes {
+				id := strconv.FormatInt(hash, 10)
 				fmt.Printf("%+v\n", hash)
+				fmt.Printf("%+v\n", manifestDatabase.Data[id])
 			}
 		}
 	}

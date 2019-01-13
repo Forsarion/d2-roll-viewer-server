@@ -8,6 +8,7 @@ import (
 	"strconv"
 )
 
+// FindHelmets Description
 func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 	var file, error = ioutil.ReadFile("../misc/forsarion-inventory.json")
 	if error != nil {
@@ -30,22 +31,34 @@ func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 		panic(error)
 	}
 
-	var helmets []manifest.InventoryItem
+	var helmets []Helmet
 	for _, item := range characterInventory.Response.ProfileInventory.Data.Items {
 		id := strconv.FormatInt(item.Hash, 10)
-		itemDefinition := manifestDatabase.Data[id]
-		itemDefinition.ItemID = id
-		if itemDefinition.Type != manifest.Armor {
+		inventoryItem := manifestDatabase.Data[id]
+		if inventoryItem.Type != manifest.Armor {
 			continue
 		}
-		if itemDefinition.SubType != manifest.HelmetArmor {
+		if inventoryItem.SubType != manifest.HelmetArmor {
 			continue
 		}
 
-		helmets = append(helmets, itemDefinition)
+		var plugs []Plug
+		for _, socket := range inventoryItem.Sockets.SocketEntries {
+			for _, reusablePlugItem := range socket.ReusablePlugItems {
+				id := strconv.FormatUint(reusablePlugItem.PlugItemHash, 10)
+				inventoryItem := manifestDatabase.Data[id]
+				plugs = append(plugs, makePlug(id, inventoryItem.DisplayProperties.Name, inventoryItem.DisplayProperties.Description))
+			}
+		}
+
+		helmets = append(helmets, makeHelmet(
+			id,
+			inventoryItem.DisplayProperties.Name,
+			inventoryItem.DisplayProperties.Description,
+			plugs))
 	}
 
-	json, error := json.Marshal(helmets)
+	json, error := json.Marshal(HelmetResponse{helmets})
 	if error != nil {
 		panic(error)
 	}

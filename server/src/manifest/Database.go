@@ -8,7 +8,6 @@ type Database struct {
 
 // InventoryItem Description
 type InventoryItem struct {
-	ItemID            string
 	SubType           SubType `json:"itemSubType"`
 	Type              Type    `json:"itemType"`
 	DisplayProperties struct {

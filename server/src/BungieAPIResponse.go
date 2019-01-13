@@ -35,7 +35,7 @@ type Socket struct {
 	PlugHash           int64          `json:"plugHash"`
 	IsEnabled          bool           `json:"isEnabled"`
 	IsVisible          bool           `json:"isVisible"`
-	ReusablePlugHashes []int          `json:"reusablePlugHashes"`
+	ReusablePlugHashes []int64        `json:"reusablePlugHashes"`
 	ReusablePlugs      []ReusablePlug `json:"reusablePlugs"`
 }
 
