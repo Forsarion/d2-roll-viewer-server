@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	manifest "manifest"
 	"net/http"
@@ -43,12 +44,39 @@ func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 		}
 
 		var plugs []Plug
-		for _, socket := range inventoryItem.Sockets.SocketEntries {
-			for _, reusablePlugItem := range socket.ReusablePlugItems {
-				id := strconv.FormatUint(reusablePlugItem.PlugItemHash, 10)
-				inventoryItem := manifestDatabase.Data[id]
-				plugs = append(plugs, makePlug(id, inventoryItem.DisplayProperties.Name, inventoryItem.DisplayProperties.Description))
+
+		for socketIndex, socket := range inventoryItem.Sockets.SocketEntries {
+			var armorPerks *manifest.SocketCategory
+			for _, socketCategory := range inventoryItem.Sockets.SocketCategories {
+				if socketCategory.Hash == manifest.ArmorPerks {
+					armorPerks = &socketCategory
+					break
+				}
 			}
+
+			if armorPerks == nil {
+				panic("Missing ArmorPerks category on Helmets!")
+			}
+
+			isArmorPerk := false
+			for _, value := range armorPerks.Indexes {
+				if uint(socketIndex) == value {
+					isArmorPerk = true
+					break
+				}
+			}
+
+			fmt.Printf("Indexes: %+v\n", armorPerks.Indexes)
+			fmt.Printf("%+v\n", socketIndex)
+			fmt.Printf("isArmorPerk %+v\n", isArmorPerk)
+
+			if isArmorPerk == false {
+				continue
+			}
+
+			id := strconv.FormatUint(socket.SingleInitialItemHash, 10)
+			inventoryItem := manifestDatabase.Data[id]
+			plugs = append(plugs, makePlug(id, inventoryItem.DisplayProperties.Name, inventoryItem.DisplayProperties.Description))
 		}
 
 		helmets = append(helmets, makeHelmet(

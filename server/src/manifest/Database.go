@@ -23,8 +23,8 @@ type InventoryItem struct {
 
 // SocketCategory Description
 type SocketCategory struct {
-	SocketCategoryHash uint64 `json:"socketCategoryHash"`
-	SocketIndexes      []uint `json:"socketIndexes"`
+	Hash    uint64 `json:"socketCategoryHash"`
+	Indexes []uint `json:"socketIndexes"`
 }
 
 // Socket Description
@@ -54,4 +54,9 @@ type Type uint
 const (
 	// Armor https://bungie-net.github.io/#/components/schemas/Destiny.DestinyItemType
 	Armor Type = 2
+)
+
+const (
+	//ArmorPerks https://data.destinysets.com/i/SocketCategory:2518356196
+	ArmorPerks uint64 = 2518356196
 )
