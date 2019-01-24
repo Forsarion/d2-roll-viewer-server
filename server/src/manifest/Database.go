@@ -15,9 +15,16 @@ type InventoryItem struct {
 		Description string `json:"description"`
 	} `json:"displayProperties"`
 	Sockets struct {
-		Detail        string   `json:"detail"`
-		SocketEntries []Socket `json:"socketEntries"`
+		Detail           string           `json:"detail"`
+		SocketEntries    []Socket         `json:"socketEntries"`
+		SocketCategories []SocketCategory `json:"socketCategories"`
 	} `json:"sockets"`
+}
+
+// SocketCategory Description
+type SocketCategory struct {
+	SocketCategoryHash uint64 `json:"socketCategoryHash"`
+	SocketIndexes      []uint `json:"socketIndexes"`
 }
 
 // Socket Description
