@@ -66,10 +66,6 @@ func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 				}
 			}
 
-			fmt.Printf("Indexes: %+v\n", armorPerks.Indexes)
-			fmt.Printf("%+v\n", socketIndex)
-			fmt.Printf("isArmorPerk %+v\n", isArmorPerk)
-
 			if isArmorPerk == false {
 				continue
 			}
@@ -77,6 +73,14 @@ func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 			id := strconv.FormatUint(socket.SingleInitialItemHash, 10)
 			inventoryItem := manifestDatabase.Data[id]
 			plugs = append(plugs, makePlug(id, inventoryItem.DisplayProperties.Name, inventoryItem.DisplayProperties.Description))
+		}
+
+		for _, socket := range characterInventory.Response.ItemComponents.Sockets.Data["1664085089"].Sockets {
+			fmt.Printf("socket: %+v\n", socket)
+			id := strconv.FormatUint(uint64(socket.PlugHash), 10)
+			inventoryItem := manifestDatabase.Data[id]
+			fmt.Printf("name: %+v\n", inventoryItem.DisplayProperties.Name)
+			fmt.Printf("description: %+v\n", inventoryItem.DisplayProperties.Description)
 		}
 
 		helmets = append(helmets, makeHelmet(
