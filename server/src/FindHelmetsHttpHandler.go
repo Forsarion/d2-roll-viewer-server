@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	manifest "manifest"
 	"net/http"
@@ -45,7 +44,7 @@ func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 
 		var plugs []Plug
 
-		for socketIndex, socket := range inventoryItem.Sockets.SocketEntries {
+		for socketIndex := 0; socketIndex < len(inventoryItem.Sockets.SocketEntries); socketIndex++ {
 			var armorPerks *manifest.SocketCategory
 			for _, socketCategory := range inventoryItem.Sockets.SocketCategories {
 				if socketCategory.Hash == manifest.ArmorPerks {
@@ -70,17 +69,18 @@ func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 				continue
 			}
 
-			id := strconv.FormatUint(socket.SingleInitialItemHash, 10)
-			inventoryItem := manifestDatabase.Data[id]
-			plugs = append(plugs, makePlug(id, inventoryItem.DisplayProperties.Name, inventoryItem.DisplayProperties.Description))
-		}
+			inventoryData := characterInventory.Response.ItemComponents.Sockets.Data[item.InstanceID]
+			randomPlug := inventoryData.Sockets[socketIndex]
 
-		for _, socket := range characterInventory.Response.ItemComponents.Sockets.Data["1664085089"].Sockets {
-			fmt.Printf("socket: %+v\n", socket)
-			id := strconv.FormatUint(uint64(socket.PlugHash), 10)
-			inventoryItem := manifestDatabase.Data[id]
-			fmt.Printf("name: %+v\n", inventoryItem.DisplayProperties.Name)
-			fmt.Printf("description: %+v\n", inventoryItem.DisplayProperties.Description)
+			for _, plug := range randomPlug.ReusablePlugs {
+				id := strconv.FormatInt(plug.Hash, 10)
+				inventoryItem := manifestDatabase.Data[id]
+				plugs = append(plugs, makePlug(
+					id,
+					inventoryItem.DisplayProperties.Name,
+					inventoryItem.DisplayProperties.Description,
+					plug.IsEnabled))
+			}
 		}
 
 		helmets = append(helmets, makeHelmet(

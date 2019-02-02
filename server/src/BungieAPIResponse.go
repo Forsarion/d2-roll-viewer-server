@@ -32,7 +32,7 @@ type Sockets struct {
 
 // Socket Socket definition.
 type Socket struct {
-	PlugHash           int64          `json:"plugHash"`
+	Hash               int64          `json:"plugHash"`
 	IsEnabled          bool           `json:"isEnabled"`
 	IsVisible          bool           `json:"isVisible"`
 	ReusablePlugHashes []int64        `json:"reusablePlugHashes"`
@@ -41,7 +41,7 @@ type Socket struct {
 
 // ReusablePlug Reusable Plug definition.
 type ReusablePlug struct {
-	PlugItemHash int  `json:"plugItemHash"`
-	CanInsert    bool `json:"canInsert"`
-	IsEnabled    bool `json:"enabled"`
+	Hash      int64 `json:"plugItemHash"`
+	CanInsert bool  `json:"canInsert"`
+	IsEnabled bool  `json:"enabled"`
 }

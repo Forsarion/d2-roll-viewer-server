@@ -23,9 +23,10 @@ type Plug struct {
 	ItemID      string `json:"itemID"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	IsEnabled   bool   `json:"isEnabled"`
 }
 
 // makePlug Constructor
-func makePlug(itemID string, name string, description string) Plug {
-	return Plug{itemID, name, description}
+func makePlug(itemID string, name string, description string, isEnabled bool) Plug {
+	return Plug{itemID, name, description, isEnabled}
 }

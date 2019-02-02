@@ -10,6 +10,5 @@ import (
 func main() {
 	http.HandleFunc("/manifest", manifest.HTTPHandler)
 	http.HandleFunc("/findHelmets", FindHelmets)
-	http.HandleFunc("/findSockets", FindSockets)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
