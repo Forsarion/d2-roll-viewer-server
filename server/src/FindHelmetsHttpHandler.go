@@ -3,11 +3,13 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
+	manifest "manifest"
 	"net/http"
 	"strconv"
 )
 
-func findHelmets(writer http.ResponseWriter, request *http.Request) {
+// FindHelmets Description
+func FindHelmets(writer http.ResponseWriter, request *http.Request) {
 	var file, error = ioutil.ReadFile("../misc/forsarion-inventory.json")
 	if error != nil {
 		panic(error)
@@ -23,30 +25,76 @@ func findHelmets(writer http.ResponseWriter, request *http.Request) {
 		panic(error)
 	}
 
-	var manifestDatabase ManifestDatabase
+	var manifestDatabase manifest.Database
 	error = json.Unmarshal(file, &manifestDatabase)
 	if error != nil {
 		panic(error)
 	}
 
-	var helmets []InventoryItem
+	var helmets []Helmet
 	for _, item := range characterInventory.Response.ProfileInventory.Data.Items {
 		id := strconv.FormatInt(item.Hash, 10)
-		itemDefinition := manifestDatabase.Data[id]
-		itemDefinition.ItemID = id
-		if itemDefinition.Type != Armor {
+		inventoryItem := manifestDatabase.Data[id]
+		if inventoryItem.Type != manifest.Armor {
 			continue
 		}
-		if itemDefinition.SubType != HelmetArmor {
+		if inventoryItem.SubType != manifest.HelmetArmor {
 			continue
 		}
-		helmets = append(helmets, itemDefinition)
+
+		var plugs []Plug
+
+		for socketIndex := 0; socketIndex < len(inventoryItem.Sockets.SocketEntries); socketIndex++ {
+			var armorPerks *manifest.SocketCategory
+			for _, socketCategory := range inventoryItem.Sockets.SocketCategories {
+				if socketCategory.Hash == manifest.ArmorPerks {
+					armorPerks = &socketCategory
+					break
+				}
+			}
+
+			if armorPerks == nil {
+				panic("Missing ArmorPerks category on Helmets!")
+			}
+
+			isArmorPerk := false
+			for _, value := range armorPerks.Indexes {
+				if uint(socketIndex) == value {
+					isArmorPerk = true
+					break
+				}
+			}
+
+			if isArmorPerk == false {
+				continue
+			}
+
+			inventoryData := characterInventory.Response.ItemComponents.Sockets.Data[item.InstanceID]
+			randomPlug := inventoryData.Sockets[socketIndex]
+
+			for _, plug := range randomPlug.ReusablePlugs {
+				id := strconv.FormatInt(plug.Hash, 10)
+				inventoryItem := manifestDatabase.Data[id]
+				plugs = append(plugs, makePlug(
+					id,
+					inventoryItem.DisplayProperties.Name,
+					inventoryItem.DisplayProperties.Description,
+					plug.IsEnabled))
+			}
+		}
+
+		helmets = append(helmets, makeHelmet(
+			id,
+			inventoryItem.DisplayProperties.Name,
+			inventoryItem.DisplayProperties.Description,
+			plugs))
 	}
 
-	json, error := json.Marshal(helmets)
+	json, error := json.Marshal(HelmetResponse{helmets})
 	if error != nil {
 		panic(error)
 	}
+
 	writer.Header().Set("Content-Type", "application/json")
 	writer.Write(json)
 }
