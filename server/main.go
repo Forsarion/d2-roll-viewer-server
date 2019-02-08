@@ -1,7 +1,7 @@
 package main
 
 import (
-	"server/manifest"
+	manifest "manifest"
 )
 
 import (
