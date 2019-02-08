@@ -3,9 +3,10 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	manifest "manifest"
 	"net/http"
 	"strconv"
+
+	manifest "github.com/Berk0ld/d2-roll-viewer-server/server/manifest"
 )
 
 // FindHelmets Description

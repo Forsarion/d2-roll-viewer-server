@@ -1,7 +1,7 @@
 package main
 
 import (
-	manifest "manifest"
+	manifest "github.com/Berk0ld/d2-roll-viewer-server/server/manifest"
 )
 
 import (
